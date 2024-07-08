@@ -3,21 +3,11 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 
-// //Set up MongoDB
-// const MongoClient = mongodb.MongoClient;
-
-// const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'Bulk Uploader data';
-
-// MongoClient.connect(connectionURL, {}, (error, client) => {
-//     if(error){
-//         return console.log('Unable to connect to Database')
-//     }
-
-//     console.log('Goood!');
-// })
 
 
 
@@ -75,6 +65,9 @@ app.get('', (req,res) => {
     });
 })
 
+//post requests
+app.post('/', (req,res))
+ 
 //run webpage in browser
 app.listen(3000, ()=>{
     console.log("loaded succesfully");
