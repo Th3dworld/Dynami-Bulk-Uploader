@@ -1,4 +1,17 @@
 body {
     font-family: arial;
     color: #898E8C;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    /* flexbox */
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    border-bottom: #999999 1px solid;
 }
