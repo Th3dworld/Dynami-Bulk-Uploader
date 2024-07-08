@@ -70,7 +70,9 @@ app.use(express.static(publicDirectoryPath));
 
 //Load pages
 app.get('', (req,res) => {
-    res.render('index', {});
+    res.render('index', {
+        name: "Matanda Hillary Phiri",
+    });
 })
 
 //run webpage in browser
