@@ -15,3 +15,20 @@ header {
     text-align: center;
     border-bottom: #999999 1px solid;
 }
+
+.input--btn {
+    padding: 30px;
+    text-align: center;
+}
+
+button {
+    background-color: #EBF2FA;
+    padding: 15px;
+    width: 100px;
+    margin-top: 15px;
+    border: #E0FBFC; 
+    font-size: 15px;
+    border-radius: 5px;
+
+}
+
