@@ -21,7 +21,8 @@ header {
     text-align: center;
 }
 
-button {
+button, 
+.custom-file-upload {
     background-color: #EBF2FA;
     padding: 15px;
     width: 100px;
@@ -32,3 +33,6 @@ button {
 
 }
 
+input[type="file"] {
+    display: none;
+}
