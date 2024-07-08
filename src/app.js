@@ -40,7 +40,7 @@ async function run() {
     await client.connect();
 
     const db = client.db(databaseName);
-    
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -64,7 +64,16 @@ const publicDirectoryPath = path.join(__dirname, '../public');
 
 //set engine and paths
 app.set('view engine', 'hbs');
-app.set('views', );
+app.set('views', viewsPath );
 hbs.registerPartials(partialsPath);
 app.use(express.static(publicDirectoryPath));
 
+//Load pages
+app.get('', (req,res) => {
+    res.render('index', {});
+})
+
+//run app
+app.listen(3000, ()=>{
+    console.log("loaded succesfully");
+})
