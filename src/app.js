@@ -73,7 +73,7 @@ app.get('', (req,res) => {
     res.render('index', {});
 })
 
-//run app
+//run webpage in browser
 app.listen(3000, ()=>{
     console.log("loaded succesfully");
 })
