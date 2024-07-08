@@ -9,13 +9,13 @@
 <body>
     <div class ="main-content">
         {{>header}}
-        <form method="post" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" action="/upload">
             <div class="input-btn">
                 <label for="file-upload" class="custom-file-upload"> Custom Upload</label>    
-                <input id="file-upload" type="file"/>
+                <input id="file-upload" type="file" name ="file"/>
                 <div>
                     <button>Submit</button>
-                </div>      
+                </div>   
             </div>
         </form>
     </div>
