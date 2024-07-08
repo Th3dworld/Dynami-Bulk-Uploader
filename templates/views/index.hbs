@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    {{>header}}
-    <form>
-        <div class="input--btn">
-            <label for="file-upload" class="custom-file-upload"> Custom Upload</label>    
-            <input id="file-upload" type="file"/>
-            <div>
-                <button>Submit</button>
-            </div>      
-        </div>
-    </form>
+    <div class ="main-content">
+        {{>header}}
+        <form>
+            <div class="input-btn">
+                <label for="file-upload" class="custom-file-upload"> Custom Upload</label>    
+                <input id="file-upload" type="file"/>
+                <div>
+                    <button>Submit</button>
+                </div>      
+            </div>
+        </form>
+    </div>
+    {{>footer}}
 </body>
 </html>
