@@ -46,3 +46,25 @@ input[type="file"] {
 .main-content{
     flex: 1;
 }
+
+.flx {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#collection-name{
+    width: 200px;
+    height: 25px;
+    margin-top: 30px;
+    flex: none;
+}
+
+.placeholder-text {
+    font-style: italic;
+    color: lightgrey;
+}
+
+.highlight {
+    background-color: lightgreen;
+}
