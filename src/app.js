@@ -4,20 +4,22 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const multer  = require('multer')
+const excelToJson = require('convert-excel-to-json');
 
 //Set up multer package
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// })
 
-
+const storage = multer.memoryStorage();
 const upload = multer({storage})
 const databaseName = 'Bulk Uploader data';
+
 
 
 
@@ -77,8 +79,19 @@ app.get('', (req,res) => {
 //post requests
 app.post('/upload', upload.single('file'), (req, res) => {
   // req.file is the name of your file in the form above, here 'uploaded_file'
-  // req.body will hold the text fields, if there were any 
-  res.json(req.file);
+  // req.body will hold the text fields, if there were any
+
+  //get access to excel 
+  const result = excelToJson({
+    source: req.file.buffer, // fs.readFileSync return a Buffer
+  });
+
+  //get array with headers
+  const headers = Object.values(result.mapping[1]);
+
+  res.send(headers);
+  
+  // res.json(result);
 });
 
  
