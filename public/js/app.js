@@ -22,3 +22,9 @@ collectionName.addEventListener('focusin', () => {
     }
     collectionName.classList.remove('placeholder-text');
 })
+
+Dropzone.options.myDropzone = {
+    paramName: "files", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    acceptedFiles: ".xlsx"
+};

@@ -5,6 +5,7 @@ const express = require('express');
 const hbs = require('hbs');
 const multer  = require('multer')
 const excelToJson = require('convert-excel-to-json');
+const { Dropzone } = require("dropzone");
 
 //Set up multer package
 // const storage = multer.diskStorage({
@@ -25,8 +26,7 @@ const  fileFilter = (req, file, cb) => {
   }
 }
 
-
-
+//Use dropzone code
 const upload = multer({storage, fileFilter})
 const databaseName = 'bulk-uploader-data';
 
@@ -176,8 +176,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
   // res.json(result);
 });
 
-
-
  
 //run webpage in browser
 app.listen(3000, async ()=> {
@@ -185,3 +183,5 @@ app.listen(3000, async ()=> {
     run().catch(console.dir);
 
 })
+
+  
