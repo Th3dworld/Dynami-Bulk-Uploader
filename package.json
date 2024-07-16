@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "convert-excel-to-json": "^1.7.0",
+    "dropzone": "^6.0.0-beta.2",
     "express": "^4.19.2",
     "hbs": "^4.2.0",
     "mongodb": "^6.8.0",

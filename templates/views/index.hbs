@@ -11,10 +11,10 @@
         {{>header}}
         <form method="POST" enctype="multipart/form-data" action="/upload">
             <div class="input-btn">
-                <label for="file-upload" class="custom-file-upload"> Custom Upload</label>    
-                <input id="file-upload" type="file" name ="file"/>
+                <label for="file-upload" class="custom-file-upload"> <div>Custom Upload</div></label>    
+                <input id="file-upload" type="file" name ="files" multiple/>
                 <div class="flx">
-                    <input id="collection-name" type="text" name ="collections"/>
+                    <input id="collection-name" type="text"/>
                     <button id="btn-submit">Submit</button>
                 </div>   
             </div>
