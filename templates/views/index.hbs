@@ -9,7 +9,7 @@
 <body>
     <div class ="main-content">
         {{>header}}
-        <form method="POST" enctype="multipart/form-data" action="/upload">
+        <form method="POST" enctype="multipart/form-data" action="/upload" class="dropzone">
             <div class="input-btn">
                 <label for="file-upload" class="custom-file-upload"> <div>Custom Upload</div></label>    
                 <input id="file-upload" type="file" name ="files" multiple/>
