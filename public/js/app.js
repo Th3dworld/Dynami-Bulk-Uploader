@@ -1,7 +1,6 @@
 'use strict'
 
 const collectionName = document.getElementById('collection-name');
-const submitButton = document.getElementsById('btn-submit');
 
 const collectionNameInit = () => {
     collectionName.value = "collection name";
@@ -24,18 +23,6 @@ collectionName.addEventListener('focusin', () => {
     collectionName.classList.remove('placeholder-text');
 })
 
-submitButton.addEventListener('click', async ()=>{
-    if(collectionName.value === "collection name" || collectionName.value === ""){
-        collectionName.value = "default";
-    }
-
-    const collection = collectionName.value;
-    
-    await fetch('/submit', {
-        method: 'POST',
-        body: JSON.stringify({collection})
-    })
-})
 
 
 // Dropzone.options.myDropzone = {

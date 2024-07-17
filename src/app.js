@@ -102,24 +102,15 @@ app.post("/submit",(req,res) => {
 
 // post requests
 app.post('/upload', upload.array('files'), (req, res) => {
-  // req.file is the name of your file in the form above, here 'uploaded_file'
-  // req.body will hold the text fields, if there were any
-  // const {mimetype} = req.files[0]
+ 
 
   //iterate through each file storing it in secified data base
   req.files.forEach((file) => {
     const sheetBuffer = xlsx.parse(file.buffer);
-    console.log(sheetBuffer);
-
-    //get headers
-    // const headGetter = excelToJson({
-    //   source: file.buffer, // fs.readFileSync return a Buffer
-    // }); 
 
     //get array with headers
     const dbheaders = sheetBuffer[0].data[1];
     const headers  =  sheetBuffer[0].data[0];
-    console.log(dbheaders);
     const dbcount = dbheaders.length;
     const headerCount = headers.length;
     const mapObject = {};
@@ -129,7 +120,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
       mapObject[headers[i]] = dbheaders[i];
       i++;
     }
-    console.log(mapObject);
 
     i = 0;
     let dbObj = {};
@@ -138,7 +128,7 @@ app.post('/upload', upload.array('files'), (req, res) => {
       dbObj[dbheaders[i]] = "";
       i++;
     }
-    console.log(dbObj);
+
     const dataSheet = sheetBuffer[1].data;
     let dataObj = {};
     const dataHeaders = dataSheet[0];
@@ -147,7 +137,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
       dataObj[item] = "";
     })
 
-    console.log(dataObj);
     const excelArray = [];
 
     i = 0;
@@ -165,7 +154,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
     })
 
     const dbArray = [];
-    console.log(excelArray);
 
     excelArray.forEach((item) => {
       let newObj = {...dbObj};
@@ -175,72 +163,14 @@ app.post('/upload', upload.array('files'), (req, res) => {
       dbArray.push(newObj);
     })
 
-    console.log(dbArray);
-
       dbArray.forEach( async (obj) => {  
             await db.collection(databaseName).insertOne(obj);
       })
-  
-    //get access to excel 
-    // const result = excelToJson({
-    //   source: file.buffer, // fs.readFileSync return a Buffer
-    //   columnToKey: {
-    //     A: '{{A1}}',
-    //     B: '{{B1}}',
-    //     C: '{{C1}}',
-    //     D: dbheaders[3],
-    //     E: dbheaders[4],
-    //     F: dbheaders[5],
-    //     G: dbheaders[6],
-    //     H: dbheaders[7],
-    //     I: dbheaders[8],
-    //     J: dbheaders[9],
-    //     K: dbheaders[10],
-    //     L: dbheaders[11],
-    //     M: dbheaders[12],
-    //     N: dbheaders[13],
-    //     O: dbheaders[14],
-    //     P: dbheaders[15],
-    //     Q: dbheaders[16],
-    //     R: dbheaders[17],
-    //     S: dbheaders[18],
-    //     T: dbheaders[19],
-    //     U: dbheaders[20],
-    //     V: dbheaders[21],
-    //     W: dbheaders[22],
-    //     X: dbheaders[23],
-    //     Y: dbheaders[24],
-    //     Z: dbheaders[25],
-    //     // D:`{{${headers[3]}}}`
-    //   },
-    //   sheets: sheets
-    // });
-
-
-
-    // try{
-
-    //  Object.values(result).forEach( (arr) => {
-    //     arr.forEach(async (item) => {
-    //       //Make sure rows containing heading is not copied
-    //       if(item[dbheaders[0]] == headers[0]){
-    //         return;
-    //       }
-    //       else{
-    //         await db.collection(databaseName).insertOne(item);
-    //       }
-    //     })
-    //   })
-    
-
-    // }catch(error){
-    //   console.error('In Uploaders', error)
-    // }
   })
   
   
 
-  res.send(req.files);
+  res.send(req.body);
   
   // res.json(result);
 });
