@@ -1,0 +1,35 @@
+<div class="table-div">
+  <h2>Overview</h2>
+  <div class="tabled">
+    <table class="table-one">
+      <tr>
+        <th>Sheets Uploaded</th>
+        <th>Successes</th>
+       <th>Failures</th>
+        <th># database inserts</th>
+      </tr>
+      <tr>
+        <td>{{sheetsUploaded}}</td>
+       <td>{{successes}}</td>
+        <td>{{fails}}</td>
+        <td>{{inserts}}</td>
+      </tr>
+    </table>
+  </div>
+
+  {{!-- New table --}}
+  <h2 id="error-head">Errors</h2>
+  <div class="tabled">
+    <table class="table-one">
+      <tr>
+        <th>Sheet</th>
+        <th>Error</th>
+      </tr>
+      <tr>
+       <td>{{sheet}}</td>
+       <td>{{err}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+

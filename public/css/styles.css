@@ -31,7 +31,7 @@ footer {
     align-items: center;
 }
 
-button, 
+#btn-submit, 
 .custom-file-upload {
     background-color: #EBF2FA;
     padding: 15px;
@@ -41,7 +41,23 @@ button,
     font-size: 15px;
     border-radius: 5px;
     text-align: center;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+}
 
+/* log scroll containers */
+.box{
+    display: flex;
+    min-height: ;
+    flex-direction: column;
+    border: red dashed;
+}
+
+.column{
+    border: blue dashed;
+    height: 20px;
 }
 
 .custom-file-upload{
@@ -96,3 +112,110 @@ a {
     border-style: dashed;
     border-color: red;
 }*/
+
+.instructionImage {
+    width: auto;
+    height: 500px;
+}
+
+.btn-open{
+    cursor: pointer;
+    border: 1px solid #3498db;
+    background-color: rgba(24, 100, 171, 0.1);
+    height: 50px;
+    width: 200px;
+    color: #3498db;
+    font-size: 1.5em;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+}
+
+.instructionImage{
+    padding: 15px;
+    flex: 1 1 auto;
+}
+
+.inst-img1{
+    display: flex;
+    justify-content: center;
+    background-color: #EBF2FA;
+    /* width: 100px; */
+    padding: 15px;
+    margin-top: 45px;
+    border: #E0FBFC; 
+    border-radius: 5px;
+}
+
+/*Successful Upload page*/
+
+.checkmark {
+    height: auto;
+    width: 300px;
+
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-child,
+.main-child-2,
+.main-child-3{
+    flex: auto;  
+} 
+
+.main-child-2{
+    color: #38b000;
+}
+
+.btn-scs{
+    background-color: #EBF2FA;
+    padding: 15px;
+    width: auto;
+    margin-top: 0px;
+    border: #E0FBFC; 
+    font-size: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+table, th, td {
+    border:1px solid black;
+}
+
+table{
+    width: 600px;
+}
+
+.table-1{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.table-div{
+    display: flexbox;
+    flex: 1;
+    justify-content: center;
+
+}
+
+.table-heading{
+    flex: 1;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 0px 0px 5px 0px;
+}
+
+.tabled{
+    display: flex;
+    justify-content: center;
+}
+
+#error-head{
+    margin-top: 40px;
+}

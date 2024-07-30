@@ -10,12 +10,12 @@
 <body>
     <div class ="main-content">
         {{>header}}
-        <form method="POST" enctype="multipart/form-data" action="/upload">
+        <form method="POST" enctype="multipart/form-data" action="/upload" autocomplete="off">
             <div class="input-btn">
-                <label for="file-upload" class="custom-file-upload"> <div>Custom Upload</div></label>    
+                <label for="file-upload" class="custom-file-upload"> <div>Click here to Upload</div></label>    
                 <input id="file-upload" type="file" name ="files" multiple/>
                 <div class="flx">
-                    <input id="collection-name" name="collection-name" type="text"/>
+                    <input id="collection-name" name="collectionName" type="text"/>
                     <button id="btn-submit">Submit</button>
                 </div>   
             </div>

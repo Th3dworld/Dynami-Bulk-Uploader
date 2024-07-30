@@ -4,19 +4,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const multer  = require('multer')
-const excelToJson = require('convert-excel-to-json');
-const { Dropzone } = require("dropzone");
 const xlsx = require('node-xlsx');
-
-//Set up multer package
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads/')
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname)
-//   }
-// })
 
 const storage = multer.memoryStorage();
 const  fileFilter = (req, file, cb) => {
@@ -40,6 +28,14 @@ const uri = "mongodb://127.0.0.1:27017";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri);
 let db;
+
+//Create Variables
+let successes = "N/A";
+let fails = "N/A";
+let sheetsUploaded = "N/A";
+let inserts =  "N/A";
+let sheet = "N/A"
+let err = "N/A"
 
 async function run() {
   try {
@@ -82,39 +78,55 @@ app.get('', (req,res) => {
 })
 
 app.get('/instructions', (req,res) => {
-  res.render('index', {
+  res.render('instructions', {
       name: "Matanda Hillary Phiri",
       title:"INSTRUCTIONS"
   });
 })
 
-app.get('/log', (req,res) => {
-  res.render('index', {
-      name: "Matanda Hillary Phiri",
-      title:"Log"
-  });
-})
-
-app.post("/submit",(req,res) => {
-  const collectionName = req.body.collection;
-  res.send(collectionName);
-})
 
 // post requests
-app.post('/upload', upload.array('files'), (req, res) => {
- 
+app.post('/upload', upload.array('files'), async(req, res) => {
+  //Array to hold error data
+  const sheetToError = {};
+  inserts = 0;
 
-  //iterate through each file storing it in secified data base
+  // get collection name
+  const collectionName = req.body.collectionName;
+
+  //Return home page if invalid collection name has been entered
+  if(collectionName === "" || collectionName === "collection name"){
+    return res.render('index', {
+      name: "Matanda Hillary Phiri",
+      title: "BULK UPLOADER"
+    })
+  }
+
+  
+  
+  //iterate through each file storing it in specified data base
   req.files.forEach((file) => {
     const sheetBuffer = xlsx.parse(file.buffer);
 
-    //get array with headers
-    const dbheaders = sheetBuffer[0].data[1];
+    //Create Variables
+    let i = 0; //Variable that will be used for every iteration needed
+    //find mapping tab
+    let mappingSheet = sheetBuffer.findIndex((obj) => obj.name === "mapping"); 
+
+    if(mappingSheet === -1){
+      sheetToError[file.originalname] = "mapping tab not found!";
+      return;
+    }
+
+    //get arrays of headers
+    const dbheaders = sheetBuffer[mappingSheet].data[1];
     const headers  =  sheetBuffer[0].data[0];
+
     const dbcount = dbheaders.length;
     const headerCount = headers.length;
+
     const mapObject = {};
-    let i = 0;
+    
     
     while(i < headerCount){
       mapObject[headers[i]] = dbheaders[i];
@@ -163,17 +175,41 @@ app.post('/upload', upload.array('files'), (req, res) => {
       dbArray.push(newObj);
     })
 
-      dbArray.forEach( async (obj) => {  
-            await db.collection(databaseName).insertOne(obj);
-      })
+    
+    dbArray.forEach( async (obj) => {  
+      await db.collection(collectionName).insertOne(obj);
+      inserts += 1;
+    })
   })
-  
-  
 
-  res.send(req.body);
-  
+  fails = Object.keys(sheetToError).length;
+  sheetsUploaded = req.files.length;
+  successes = sheetsUploaded - fails;
+
+  if(fails > 0){
+    sheet = Object.keys(sheetToError)[0];
+    err = Object.values(sheetToError)[0];
+  }
+
+  res.render('message', {
+    name: "Matanda Hillary Phiri",
+  })
+
   // res.json(result);
 });
+
+app.get('/log', (req,res) => {
+  res.render('log', {
+      name: "Matanda Hillary Phiri",
+      title:"Log",
+      successes,
+      fails,
+      sheetsUploaded,
+      inserts,
+      sheet,
+      err,
+  });
+})
 
  
 //run webpage in browser
